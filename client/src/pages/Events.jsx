@@ -13,16 +13,21 @@ function Events() {
 
   return (
     <div className="events-page">
-      <h1>Upcoming Events 🎉</h1>
+      <h1>✨ Explore Events</h1>
 
       <div className="events-grid">
         {events.map((event) => (
           <div className="event-card" key={event._id}>
-            <h3>{event.title}</h3>
-            <p>{event.description}</p>
-            <p>📍 {event.location}</p>
-            <p>📅 {event.date}</p>
-            <p>💰 ₹{event.price}</p>
+            <h2>{event.title}</h2>
+            <p className="desc">{event.description}</p>
+
+            <div className="event-info">
+              <span>📍 {event.location}</span>
+              <span>📅 {event.date}</span>
+              <span className="price">₹{event.price}</span>
+            </div>
+
+            <button className="book-btn">Book Now</button>
           </div>
         ))}
       </div>
