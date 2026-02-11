@@ -66,3 +66,66 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* Login Page Background */
+.login-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+}
+
+/* Glass card */
+.login-card {
+  background: rgba(255,255,255,0.08);
+  padding: 40px;
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  width: 320px;
+  text-align: center;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.login-card h2 {
+  color: white;
+  margin-bottom: 20px;
+}
+
+/* Inputs */
+.login-card input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: none;
+}
+
+/* Button */
+.login-card button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-card button:hover {
+  background: #1d4ed8;
+  transform: scale(1.03);
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
