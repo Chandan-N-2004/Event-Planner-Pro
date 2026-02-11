@@ -7,7 +7,7 @@ function Events() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/events")
+      .get("https://event-planner-pro-xw9a.onrender.com/api/auth/events")
       .then((res) => {
         setEvents(res.data);
       })
