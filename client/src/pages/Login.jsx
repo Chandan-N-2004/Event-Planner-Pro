@@ -9,27 +9,26 @@ function Login() {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-  try {
-    const res = await axios.post(
-      "https://event-planner-pro-xw9a.onrender.com/api/auth/login",
-      { email, password }
-    );
+    try {
+      const res = await axios.post(
+        "https://event-planner-pro-xw9a.onrender.com/api/auth/login",
+        { email, password }
+      );
 
-    localStorage.setItem("token", res.data.token);
+      localStorage.setItem("token", res.data.token);
 
-    navigate("/events");
+      navigate("/events");
 
-  } catch (err) {
-    alert("Login Failed");
-    console.log(err);
-  }
-};
-
+    } catch (err) {
+      alert("Login Failed");
+      console.log(err);
+    }
+  };
 
   return (
     <motion.div
       className="login-page"
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
     >
