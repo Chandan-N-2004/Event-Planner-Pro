@@ -14,6 +14,13 @@ function Login() {
         { email, password }
       );
 
+<<<<<<< HEAD
+      navigate("/events");
+=======
+      console.log(res.data);
+>>>>>>> dabed88 (Fixed React Router deployment)
+
+      // Redirect smoothly without reload
       navigate("/events");
 
     } catch (err) {
