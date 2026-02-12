@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -8,21 +9,30 @@ function Login() {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    try {
-      await axios.post(
-        "https://event-planner-pro-xw9a.onrender.com/api/auth/login",
-        { email, password }
-      );
+  try {
+    const res = await axios.post(
+      "https://event-planner-pro-xw9a.onrender.com/api/auth/login",
+      { email, password }
+    );
 
-      navigate("/events");
+    localStorage.setItem("token", res.data.token);
 
-    } catch (err) {
-      alert("Login Failed");
-    }
-  };
+    navigate("/events");
+
+  } catch (err) {
+    alert("Login Failed");
+    console.log(err);
+  }
+};
+
 
   return (
-    <div className="login-page">
+    <motion.div
+      className="login-page"
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
       <div className="login-card">
         <h2>Welcome Back 👋</h2>
 
@@ -45,7 +55,7 @@ function Login() {
           <Link to="/signup"> Signup</Link>
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

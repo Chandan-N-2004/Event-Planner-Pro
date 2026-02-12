@@ -1,10 +1,14 @@
 import { useState } from "react";
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSignup = async () => {
     try {
@@ -14,34 +18,50 @@ function Signup() {
       );
 
       alert("Signup Successful");
+      navigate("/login");
 
     } catch (err) {
       alert("Signup Failed");
+      console.log(err);
     }
   };
 
   return (
-    <div style={{ padding: 20 }}>
-      <h2>Signup</h2>
+    <motion.div
+      className="login-page"
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
+      <div className="login-card">
+        <h2>Create Account 🚀</h2>
 
-      <input
-        placeholder="Name"
-        onChange={(e) => setName(e.target.value)}
-      /><br /><br />
+        <input
+          type="text"
+          placeholder="Name"
+          onChange={(e) => setName(e.target.value)}
+        />
 
-      <input
-        placeholder="Email"
-        onChange={(e) => setEmail(e.target.value)}
-      /><br /><br />
+        <input
+          type="email"
+          placeholder="Email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-      <input
-        placeholder="Password"
-        type="password"
-        onChange={(e) => setPassword(e.target.value)}
-      /><br /><br />
+        <input
+          type="password"
+          placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
-      <button onClick={handleSignup}>Signup</button>
-    </div>
+        <button onClick={handleSignup}>Signup</button>
+
+        <p>
+          Already have an account?
+          <Link to="/login"> Login</Link>
+        </p>
+      </div>
+    </motion.div>
   );
 }
 

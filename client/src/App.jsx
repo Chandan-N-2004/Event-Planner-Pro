@@ -8,10 +8,11 @@ import Events from "./pages/Events";
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />   {/* THIS removes dim effect */}
+      <Navbar />
 
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} /> 
         <Route path="/signup" element={<Signup />} />
         <Route path="/events" element={<Events />} />
         <Route path="/admin" element={<Admin />} />

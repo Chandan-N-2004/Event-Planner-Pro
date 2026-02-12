@@ -1,30 +1,66 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
 
 function Navbar() {
+  const location = useLocation();
+  const token = localStorage.getItem("token");
+
+  const linkStyle = (path) => ({
+    marginLeft: "20px",
+    color: location.pathname === path ? "#38bdf8" : "white",
+    textDecoration: "none",
+    fontWeight: "500"
+  });
+
   return (
-    <nav style={{
-      display: "flex",
-      justifyContent: "space-between",
-      padding: "15px 40px",
-      background: "#0f172a",
-      color: "white"
-    }}>
-      <h2>EventPlannerPro</h2>
+    <motion.nav
+      initial={{ y: -60, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        padding: "15px 40px",
+        background: "#020617",
+        color: "white",
+        position: "sticky",
+        top: 0,
+        zIndex: 1000
+      }}
+    >
+      <h2 style={{ fontWeight: "bold" }}>EventPlannerPro</h2>
 
       <div>
-        <Link to="/" style={linkStyle}>Home</Link>
-        <Link to="/events" style={linkStyle}>Events</Link>
-        <Link to="/login" style={linkStyle}>Login</Link>
-        <Link to="/signup" style={linkStyle}>Signup</Link>
+        <Link to="/" style={linkStyle("/")}>Home</Link>
+        <Link to="/events" style={linkStyle("/events")}>Events</Link>
+
+        {!token ? (
+          <>
+            <Link to="/login" style={linkStyle("/login")}>Login</Link>
+            <Link to="/signup" style={linkStyle("/signup")}>Signup</Link>
+          </>
+        ) : (
+          <button
+            onClick={() => {
+              localStorage.removeItem("token");
+              window.location.href = "/login";
+            }}
+            style={{
+              marginLeft: "20px",
+              background: "#ef4444",
+              border: "none",
+              padding: "8px 15px",
+              color: "white",
+              borderRadius: "6px",
+              cursor: "pointer"
+            }}
+          >
+            Logout
+          </button>
+        )}
       </div>
-    </nav>
+    </motion.nav>
   );
 }
-
-const linkStyle = {
-  marginLeft: "20px",
-  color: "white",
-  textDecoration: "none"
-};
 
 export default Navbar;
