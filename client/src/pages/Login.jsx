@@ -15,8 +15,10 @@ function Login() {
         { email, password }
       );
 
+      // Save token
       localStorage.setItem("token", res.data.token);
 
+      alert("Login Successful");
       navigate("/events");
 
     } catch (err) {
@@ -26,35 +28,43 @@ function Login() {
   };
 
   return (
-    <motion.div
-      className="login-page"
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-    >
-      <div className="login-card">
-        <h2>Welcome Back 👋</h2>
+    <div className="page"> {/* navbar spacing fix */}
 
-        <input
-          type="email"
-          placeholder="Email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
+      <motion.div
+        className="login-page"
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        <div className="login-card">
 
-        <input
-          type="password"
-          placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
+          <h2>Welcome Back 👋</h2>
 
-        <button onClick={handleLogin}>Login</button>
+          <input
+            type="email"
+            placeholder="Email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
-        <p>
-          Don’t have an account?
-          <Link to="/signup"> Signup</Link>
-        </p>
-      </div>
-    </motion.div>
+          <input
+            type="password"
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+
+          <button onClick={handleLogin}>
+            Login
+          </button>
+
+          <p>
+            Don’t have an account?
+            <Link to="/signup"> Signup</Link>
+          </p>
+
+        </div>
+      </motion.div>
+
+    </div>
   );
 }
 

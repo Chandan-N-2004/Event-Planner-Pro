@@ -6,10 +6,11 @@ function Navbar() {
   const token = localStorage.getItem("token");
 
   const linkStyle = (path) => ({
-    marginLeft: "20px",
+    marginLeft: "25px",
     color: location.pathname === path ? "#38bdf8" : "white",
     textDecoration: "none",
-    fontWeight: "500"
+    fontWeight: "500",
+    fontSize: "15px"
   });
 
   return (
@@ -20,16 +21,22 @@ function Navbar() {
       style={{
         display: "flex",
         justifyContent: "space-between",
-        padding: "15px 40px",
-        background: "#020617",
-        color: "white",
+        alignItems: "center",
+        padding: "18px 50px",
+        background: "rgba(2,6,23,0.9)",
+        backdropFilter: "blur(12px)",
+        borderBottom: "1px solid rgba(255,255,255,0.1)",
         position: "sticky",
         top: 0,
         zIndex: 1000
       }}
     >
-      <h2 style={{ fontWeight: "bold" }}>EventPlannerPro</h2>
+      {/* Logo */}
+      <h2 style={{ fontWeight: "bold", letterSpacing: "1px" }}>
+        EventPlannerPro
+      </h2>
 
+      {/* Navigation Links */}
       <div>
         <Link to="/" style={linkStyle("/")}>Home</Link>
         <Link to="/events" style={linkStyle("/events")}>Events</Link>
@@ -46,14 +53,22 @@ function Navbar() {
               window.location.href = "/login";
             }}
             style={{
-              marginLeft: "20px",
+              marginLeft: "25px",
               background: "#ef4444",
               border: "none",
-              padding: "8px 15px",
+              padding: "9px 18px",
               color: "white",
-              borderRadius: "6px",
-              cursor: "pointer"
+              borderRadius: "8px",
+              cursor: "pointer",
+              fontWeight: "bold",
+              transition: "0.3s"
             }}
+            onMouseOver={e =>
+              (e.target.style.background = "#dc2626")
+            }
+            onMouseOut={e =>
+              (e.target.style.background = "#ef4444")
+            }
           >
             Logout
           </button>
