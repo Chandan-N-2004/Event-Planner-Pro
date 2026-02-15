@@ -23,6 +23,7 @@ function Login() {
       navigate("/events");
 
     } catch (err) {
+      console.log(err.response?.data || err.message);
       alert("Login Failed");
       console.log(err);
     }
