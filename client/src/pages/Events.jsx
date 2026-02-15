@@ -14,13 +14,37 @@ function Events() {
       .finally(() => setLoading(false));
   }, []);
 
+  const handleBooking = async (eventId) => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      alert("Please login first");
+      return;
+    }
+
+    try {
+      await axios.post(
+        "https://event-planner-pro-xw9a.onrender.com/api/bookings",
+        {
+          userId: localStorage.getItem("userId"),
+          eventId
+        }
+      );
+
+      alert("Event booked successfully 🎉");
+
+    } catch (err) {
+      console.log(err);
+      alert("Booking failed");
+    }
+  };
+
   return (
     <div className="page">
       <div className="events-page">
         <h1>✨ Explore Events</h1>
 
         <div className="events-grid">
-
           {loading
             ? Array(6).fill().map((_, i) => (
                 <div key={i} className="skeleton-card"></div>
@@ -40,17 +64,20 @@ function Events() {
 
                   <div className="event-info">
                     <span>📍 {event.location}</span>
-                    <span>📅 {event.date}</span>
+                    <span>
+                      📅 {new Date(event.date).toLocaleDateString()}
+                    </span>
                     <span className="price">₹ {event.price}</span>
                   </div>
 
-                  <button className="book-btn">
+                  <button
+                    className="book-btn"
+                    onClick={() => handleBooking(event._id)}
+                  >
                     Book Now
                   </button>
                 </motion.div>
-              ))
-          }
-
+              ))}
         </div>
       </div>
     </div>
