@@ -250,3 +250,17 @@ nav a {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
 }
+
+/* Booking history  */
+.events-page h1 {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.event-card {
+  transition: 0.3s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-6px);
+}

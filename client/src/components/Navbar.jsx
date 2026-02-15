@@ -45,6 +45,10 @@ function Navbar() {
           My Bookings
         </Link>
 
+        <Link to="/history" style={linkStyle("/history")}>
+          Booking History 
+        </Link>
+
         {!token ? (
           <>
             <Link to="/login" style={linkStyle("/login")}>Login</Link>

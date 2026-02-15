@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Events from "./pages/Events";
 import MyBookings from "./pages/MyBookings";
+import BookingHistory from "./pages/BookingHistory";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/events" element={<Events />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/my-bookings" element={<MyBookings />} />
+        <Route path="/history" element={<BookingHistory />} />
       </Routes>
 
     </BrowserRouter>
