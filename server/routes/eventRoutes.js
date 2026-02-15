@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const eventController = require("../controllers/eventController");
+const adminMiddleware = require("../middleware/adminMiddleware");
 
 router.post("/create", eventController.createEvent);
 router.get("/", eventController.getEvents);
@@ -29,3 +30,6 @@ router.delete("/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+router.post("/create", adminMiddleware, createEvent);
+router.delete("/:id", adminMiddleware, deleteEvent);
