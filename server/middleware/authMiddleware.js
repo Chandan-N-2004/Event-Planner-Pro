@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const adminMiddleware = (req, res, next) => {
+const authMiddleware = (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
 
@@ -12,17 +12,11 @@ const adminMiddleware = (req, res, next) => {
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // check admin role
-    if (decoded.role !== "admin") {
-      return res.status(403).json({ message: "Admin access only" });
-    }
-
     req.user = decoded;
     next();
-
   } catch (error) {
     res.status(401).json({ message: "Invalid token" });
   }
 };
 
-module.exports = adminMiddleware;
+module.exports = authMiddleware;
