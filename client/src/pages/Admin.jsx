@@ -1,57 +1,34 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
 
-function Admin() {
+export default function Admin() {
   const [events, setEvents] = useState([]);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-
-  const API = "https://event-planner-pro-xw9a.onrender.com/api/events";
 
   useEffect(() => {
-    fetchEvents();
+    fetch("http://localhost:5000/api/events")
+      .then(res => res.json())
+      .then(data => setEvents(data));
   }, []);
 
-  const fetchEvents = () => {
-    axios.get(API).then(res => setEvents(res.data));
-  };
-
-  const addEvent = async () => {
-    await axios.post(API, { title, description });
-    fetchEvents();
-    setTitle("");
-    setDescription("");
-  };
-
   const deleteEvent = async (id) => {
-    await axios.delete(`${API}/${id}`);
-    fetchEvents();
+    await fetch(`http://localhost:5000/api/events/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    });
+
+    alert("Event deleted");
+    window.location.reload();
   };
 
   return (
-    <div style={{ padding: 40 }}>
-      <h2>Admin Dashboard</h2>
+    <div style={{ padding: 20 }}>
+      <h1>Admin Dashboard</h1>
 
-      <input
-        placeholder="Event Title"
-        value={title}
-        onChange={e => setTitle(e.target.value)}
-      /><br /><br />
-
-      <input
-        placeholder="Description"
-        value={description}
-        onChange={e => setDescription(e.target.value)}
-      /><br /><br />
-
-      <button onClick={addEvent}>Create Event</button>
-
-      <hr />
-
-      {events.map(e => (
-        <div key={e._id}>
-          <h3>{e.title}</h3>
-          <button onClick={() => deleteEvent(e._id)}>
+      {events.map(event => (
+        <div key={event._id}>
+          <h3>{event.title}</h3>
+          <button onClick={() => deleteEvent(event._id)}>
             Delete
           </button>
         </div>
@@ -59,5 +36,3 @@ function Admin() {
     </div>
   );
 }
-
-export default Admin;
