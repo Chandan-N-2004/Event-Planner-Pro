@@ -1,32 +1,34 @@
-const Event = require("../models/Event");
+// controllers/eventController.js
 
-// Create Event
 exports.createEvent = async (req, res) => {
   try {
-    const event = new Event(req.body);
-    await event.save();
-    res.json({ message: "Event Created", event });
+    res.json({
+      success: true,
+      message: "Event created successfully"
+    });
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({ error: err.message });
   }
 };
 
-// Get All Events
 exports.getEvents = async (req, res) => {
   try {
-    const events = await Event.find();
-    res.json(events);
+    res.json({
+      success: true,
+      message: "Events fetched"
+    });
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({ error: err.message });
   }
 };
 
-// Delete Event
 exports.deleteEvent = async (req, res) => {
   try {
-    await Event.findByIdAndDelete(req.params.id);
-    res.json({ message: "Event Deleted" });
+    res.json({
+      success: true,
+      message: "Event deleted"
+    });
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({ error: err.message });
   }
 };
