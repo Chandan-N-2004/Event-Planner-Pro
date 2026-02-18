@@ -1,3 +1,5 @@
+console.log("HOME PAGE LOADED");
+
 import { Link } from "react-router-dom";
 
 function Home() {
