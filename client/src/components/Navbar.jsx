@@ -41,13 +41,10 @@ function Navbar() {
         <Link to="/" style={linkStyle("/")}>Home</Link>
         <Link to="/events" style={linkStyle("/events")}>Events</Link>
 
-        <Link to="/my-bookings" style={linkStyle("/my-bookings")}>
+        <Link to="/bookings" style={linkStyle("/bookings")}>
           My Bookings
         </Link>
 
-        <Link to="/history" style={linkStyle("/history")}>
-          Booking History 
-        </Link>
 
         {!token ? (
           <>
